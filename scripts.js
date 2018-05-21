@@ -1,8 +1,9 @@
 let intervalId = 0;
 
 function countdown() {
-    let mins = document.querySelector('.mins');
-    let secs = document.querySelector('.secs');
+    const mins = document.querySelector('.mins');
+    const secs = document.querySelector('.secs');
+    const title = document.querySelector('title');
 
     if(intervalId > 0) { return; }
 
@@ -15,21 +16,20 @@ function countdown() {
             intervalId = 0;
 
             // Count tomatos
-            const count = document.querySelector('.count');
-            let counts = parseInt(count.value);
-            counts += 1;
-            count.value = counts;
-            alert('Time\'s up');
+            document.querySelector('.harvest').innerHTML
+                += `<div><img src="img/tomato.png" alt="Tomato juice Cartoon Clip art - Creative tomatoes @kisspng"></div>`;
         }
 
         // Countdown
         if(secs.value == 0) { // mins
             mins.value -= 1;
-            if(mins.value < 10) { mins.value = "0" + mins.value; }
+            if(mins.value < 10) { mins.value = '0' + mins.value; }
             secs.value = 59;
+            title.innerHTML = `Tomato Clock ${mins.value}:${secs.value}`;
         } else { // secs
             secs.value -= 1;
-            if(secs.value < 10) { secs.value = "0" + secs.value; }
+            if(secs.value < 10) { secs.value = '0' + secs.value; }
+            title.innerHTML = `Tomato Clock ${mins.value}:${secs.value}`;
         }
     }, 1000);
 }
@@ -43,8 +43,11 @@ function reset() {
     clearInterval(intervalId);
     intervalId = 0;
 
-    document.querySelector('.mins').value = 25;
+    document.querySelector('.mins').value = '25';
     document.querySelector('.secs').value = '00';
+
+    document.querySelector('title').innerHTML 
+        = 'Tomato Clock 25:00';
 }
 
 document.querySelector('.start').addEventListener('click', countdown);
